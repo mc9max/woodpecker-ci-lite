@@ -24,7 +24,7 @@ Host your own Woodpecker CI on Railway. This template provisions a server (UI, A
 - **Parallel steps** — `WOODPECKER_MAX_WORKFLOWS` controls concurrency
 - **Persistent** — SQLite DB persists across deploys via Railway volume
 
-## Dependencies for
+### Deployment Dependencies
 
 This template is self-contained — no external services required. All data persists on the server's volume. The only external dependency is an OAuth app with your forge (GitHub, GitLab, Forgejo, or Gitea) for user authentication.
 

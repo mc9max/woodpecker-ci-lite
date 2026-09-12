@@ -1,4 +1,4 @@
-FROM ghcr.io/woodpeckerci/woodpecker-server:3.18
+FROM docker.io/woodpeckerci/woodpecker-server:v3.18-alpine
 
 RUN mkdir -p /var/lib/woodpecker && chown -R 1000:1000 /var/lib/woodpecker
 

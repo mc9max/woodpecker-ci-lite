@@ -11,31 +11,32 @@ export default defineRailway(() => {
   });
 
   const agent = service("agent", {
-    source: woodpeckerCiLite,
-    build: { dockerfilePath: "agent/Dockerfile" },
+    source: image("woodpeckerci/woodpecker-agent:v3.18-alpine"),
     replicas: { "us-west2": 1 },
     env: {
+      GODEBUG: "netdns=go",
       WOODPECKER_AGENT_SECRET: preserve(),
-      WOODPECKER_BACKEND: preserve(),
+      WOODPECKER_BACKEND: "local",
       WOODPECKER_GRPC_SECRET: preserve(),
       WOODPECKER_LOG_LEVEL: preserve(),
+      WOODPECKER_MAX_WORKFLOWS: "4",
       WOODPECKER_SERVER: preserve()
     },
   });
 
   const woodpeckerServer = service("woodpecker-server", {
-    source: woodpeckerCiLite,
-    build: { dockerfilePath: "server/Dockerfile" },
+    source: image("woodpeckerci/woodpecker-server:v3.18.1-alpine"),
     deploy: { healthcheckPath: "/healthz" },
     replicas: { "us-west2": 1 },
     volumeMounts: { "/var/lib/woodpecker": woodpeckerServerVolume },
     env: {
+      GODEBUG: "netdns=go",
       PORT: preserve(),
       RAILWAY_RUN_UID: preserve(),
       WOODPECKER_ADMIN: preserve(),
       WOODPECKER_AGENT_SECRET: preserve(),
       WOODPECKER_DATABASE_DATASOURCE: preserve(),
-      WOODPECKER_DATABASE_DRIVER: preserve(),
+      WOODPECKER_DATABASE_DRIVER: "sqlite3",
       WOODPECKER_GITHUB: preserve(),
       WOODPECKER_GITHUB_CLIENT_ID: preserve(),
       WOODPECKER_GITHUB_CLIENT_SECRET: preserve(),
@@ -48,6 +49,6 @@ export default defineRailway(() => {
   });
 
   return project("woodpecker-ci-lite", {
-    resources: [agent, woodpeckerServer, woodpeckerServerVolume],
+    resources: [agent, woodpeckerServer],
   });
 });

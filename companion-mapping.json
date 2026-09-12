@@ -1,0 +1,10 @@
+{
+  "server": {
+    "private": "${{server.RAILWAY_PRIVATE_DOMAIN}}",
+    "public": "${{server.RAILWAY_PUBLIC_DOMAIN}}"
+  },
+  "agent": {
+    "private": "${{agent.RAILWAY_PRIVATE_DOMAIN}}",
+    "public": "${{agent.RAILWAY_PUBLIC_DOMAIN}}"
+  }
+}

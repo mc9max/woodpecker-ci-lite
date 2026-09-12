@@ -1,0 +1,112 @@
+{
+  "PORT": {
+    "type": "string",
+    "description": "Server HTTP port",
+    "defaultValue": "8000"
+  },
+  "WOODPECKER_HOST": {
+    "type": "string",
+    "description": "Public URL of this server (used for webhook callbacks)",
+    "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}"
+  },
+  "WOODPECKER_OPEN": {
+    "type": "string",
+    "description": "Allow open registration (true/false)",
+    "defaultValue": "true"
+  },
+  "WOODPECKER_ADMIN": {
+    "type": "string",
+    "description": "Admin username (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_AGENT_SECRET": {
+    "type": "string",
+    "description": "Shared secret for agent-to-server authentication (must match agent's secret)",
+    "defaultValue": "${{secret(32)}}"
+  },
+  "WOODPECKER_GITHUB": {
+    "type": "string",
+    "description": "Enable GitHub OAuth (true/false)",
+    "defaultValue": "false"
+  },
+  "WOODPECKER_GITHUB_CLIENT": {
+    "type": "string",
+    "description": "GitHub OAuth Client ID (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_GITHUB_SECRET": {
+    "type": "string",
+    "description": "GitHub OAuth Client Secret (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_FORGEJO": {
+    "type": "string",
+    "description": "Enable Forgejo OAuth (true/false)",
+    "defaultValue": "false"
+  },
+  "WOODPECKER_FORGEJO_CLIENT": {
+    "type": "string",
+    "description": "Forgejo OAuth Client ID (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_FORGEJO_SECRET": {
+    "type": "string",
+    "description": "Forgejo OAuth Client Secret (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_GITEA": {
+    "type": "string",
+    "description": "Enable Gitea OAuth (true/false)",
+    "defaultValue": "false"
+  },
+  "WOODPECKER_GITEA_CLIENT": {
+    "type": "string",
+    "description": "Gitea OAuth Client ID (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_GITEA_SECRET": {
+    "type": "string",
+    "description": "Gitea OAuth Client Secret (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_GITLAB": {
+    "type": "string",
+    "description": "Enable GitLab OAuth (true/false)",
+    "defaultValue": "false"
+  },
+  "WOODPECKER_GITLAB_CLIENT": {
+    "type": "string",
+    "description": "GitLab OAuth Client ID (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_GITLAB_SECRET": {
+    "type": "string",
+    "description": "GitLab OAuth Client Secret (optional, isOptional: true)",
+    "defaultValue": ""
+  },
+  "WOODPECKER_DATABASE_DRIVER": {
+    "type": "string",
+    "description": "Database driver (sqlite3 or postgres)",
+    "defaultValue": "sqlite3"
+  },
+  "WOODPECKER_DATABASE_DATASOURCE": {
+    "type": "string",
+    "description": "Database connection string or SQLite file path",
+    "defaultValue": "/var/lib/woodpecker/woodpecker.sqlite"
+  },
+  "WOODPECKER_LOG_LEVEL": {
+    "type": "string",
+    "description": "Log level (info, warn, error, debug)",
+    "defaultValue": "info"
+  },
+  "WOODPECKER_DEBUG_PRETTY": {
+    "type": "string",
+    "description": "Pretty-print logs (true/false)",
+    "defaultValue": "false"
+  },
+  "WOODPECKER_DEBUG_NOCOLOR": {
+    "type": "string",
+    "description": "Disable colored output (true/false)",
+    "defaultValue": "true"
+  }
+}

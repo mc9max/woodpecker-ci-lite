@@ -1,0 +1,22 @@
+{
+  "WOODPECKER_SERVER": {
+    "type": "string",
+    "description": "Server GRPC address (host:port) — use the server's private domain",
+    "defaultValue": "${{server.RAILWAY_PRIVATE_DOMAIN}}:9000"
+  },
+  "WOODPECKER_AGENT_SECRET": {
+    "type": "string",
+    "description": "Shared secret for agent-to-server authentication (must match server's secret)",
+    "defaultValue": "${{secret(32)}}"
+  },
+  "WOODPECKER_MAX_WORKFLOWS": {
+    "type": "string",
+    "description": "Maximum number of parallel workflows",
+    "defaultValue": "4"
+  },
+  "WOODPECKER_BACKEND": {
+    "type": "string",
+    "description": "Backend type (local, docker, kubernetes)",
+    "defaultValue": "local"
+  }
+}

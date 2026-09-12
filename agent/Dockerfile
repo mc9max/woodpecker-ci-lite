@@ -1,4 +1,4 @@
-FROM ghcr.io/woodpeckerci/woodpecker-agent:3.18
+FROM docker.io/woodpeckerci/woodpecker-agent:v3.18-alpine
 
 EXPOSE 9000
 

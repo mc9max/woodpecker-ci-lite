@@ -19,6 +19,24 @@ Woodpecker CI is a modern, lightweight alternative to GitHub Actions that runs y
 - **Cost-effective CI for small teams** — single-server deployment with SQLite, no external database needed
 - **Custom build environments** — the local backend runs steps directly on the agent, giving you full control over the execution environment
 
+## Deployment Dependencies
+
+This template is self-contained — no external services required. All data persists on the server's volume.
+
+The only external dependency is a **one-time GitHub OAuth App** for user authentication (required for the login button to work):
+
+1. Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
+2. **Homepage URL:** `https://<your-railway-public-domain>`
+3. **Authorization callback URL:** `https://<your-railway-public-domain>/authorize`
+4. Copy the **Client ID** and **Client Secret**
+5. In Railway, set these environment variables on the `woodpecker-server` service:
+   - `WOODPECKER_GITHUB=true`
+   - `WOODPECKER_GITHUB_CLIENT=<your-client-id>`
+   - `WOODPECKER_GITHUB_SECRET=<your-client-secret>`
+6. Redeploy the server service
+
+Without OAuth configured, the login button returns a 404 — this is expected. OAuth is a one-time setup per deployment.
+
 ## Architecture
 
 - **Server** — UI, API, webhook receiver, pipeline analyzer. Stores everything in SQLite (`/var/lib/woodpecker`).
@@ -27,7 +45,7 @@ Woodpecker CI is a modern, lightweight alternative to GitHub Actions that runs y
 ## Features
 
 - **GitHub Actions alternative** — familiar YAML pipeline syntax
-- **OAuth login** — GitHub/GitLab/Forgejo/Gitea OAuth2 (configure via env vars)
+- **OAuth login** — GitHub OAuth2 (one-time setup, see Deployment Dependencies)
 - **Local backend** — runs pipeline steps directly on the agent (no Docker daemon needed)
 - **SQLite by default** — zero external database to manage
 - **Webhook triggers** — automatic pipeline runs on push/PR
@@ -46,9 +64,9 @@ Woodpecker CI requires two services:
 1. **Server** — the web UI and API. Exposes port 8000 for HTTP and port 9000 for GRPC (agent communication).
 2. **Agent** — the pipeline executor. Connects to the server via GRPC using a shared secret.
 
-Both services must share the same `WOODPECKER_AGENT_SECRET`. The server stores all data in SQLite, persisted via a Railway volume mounted at `/var/lib/woodpecker`.
+Both services must share the same `WOODPECKER_AGENT_SECRET`. The server stores all data in SQLite, persisted via a Railway volume mounted at `/var/lib/woodpecker`. No Docker daemon is required — the agent runs pipeline steps locally.
 
-To enable user authentication, configure an OAuth app with your forge (GitHub, GitLab, Forgejo, or Gitea) and set the corresponding `WOODPECKER_<FORGE>_CLIENT` and `WOODPECKER_<FORGE>_SECRET` environment variables.
+**GitHub OAuth (one-time setup):** To enable login, create a GitHub OAuth App as described in the Deployment Dependencies section above. Without OAuth configured, the login button returns a 404 — this is expected behavior.
 
 ## Configuration
 
@@ -72,10 +90,11 @@ To enable user authentication, configure an OAuth app with your forge (GitHub, G
 ## Quick Start
 
 1. Deploy via the button above.
-2. Configure OAuth with your forge (GitHub/GitLab/Forgejo/Gitea).
-3. Set `WOODPECKER_OPEN=true` and `WOODPECKER_ADMIN=<your-username>`.
-4. Access the dashboard at `https://${{RAILWAY_PUBLIC_DOMAIN}}`.
-5. Add your first repository and push a `.woodpecker.yml` pipeline.
+2. Create a GitHub OAuth App (see Deployment Dependencies above).
+3. Set the OAuth credentials on the `woodpecker-server` service and redeploy.
+4. Set `WOODPECKER_OPEN=true` and `WOODPECKER_ADMIN=<your-username>`.
+5. Access the dashboard at `https://${{RAILWAY_PUBLIC_DOMAIN}}`.
+6. Add your first repository and push a `.woodpecker.yml` pipeline.
 
 ## License
 

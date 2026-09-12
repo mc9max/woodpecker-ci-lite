@@ -6,7 +6,7 @@ Lightweight self-hosted CI/CD platform — GitHub Actions alternative. Runs pipe
 
 Host your own Woodpecker CI on Railway. This template provisions a server (UI, API, SQLite) and an agent (pipeline executor) with persistent storage for your build data.
 
-[![Deploy to Railway](https://railway.app/button.svg)](https://railway.com/deploy/O64Psh)
+[![Deploy to Railway](https://railway.app/button.svg)](https://railway.com/deploy/dXHBAR)
 
 ## Why Deploy
 

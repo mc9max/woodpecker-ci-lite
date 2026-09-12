@@ -99,6 +99,11 @@
     "description": "Log level (info, warn, error, debug)",
     "defaultValue": "info"
   },
+  "WOODPECKER_GRPC_SECRET": {
+    "type": "string",
+    "description": "Shared GRPC secret — referenced by the agent service",
+    "defaultValue": "${{secret(32)}}"
+  },
   "WOODPECKER_DEBUG_PRETTY": {
     "type": "string",
     "description": "Pretty-print logs (true/false)",

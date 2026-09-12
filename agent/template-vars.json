@@ -6,8 +6,13 @@
   },
   "WOODPECKER_AGENT_SECRET": {
     "type": "string",
-    "description": "Shared secret for agent-to-server authentication (must match server's secret)",
-    "defaultValue": "${{secret(32)}}"
+    "description": "Shared secret for agent-to-server authentication — references the server's secret",
+    "defaultValue": "${{server.WOODPECKER_AGENT_SECRET}}"
+  },
+  "WOODPECKER_GRPC_SECRET": {
+    "type": "string",
+    "description": "Shared GRPC secret — references the server's GRPC secret",
+    "defaultValue": "${{server.WOODPECKER_GRPC_SECRET}}"
   },
   "WOODPECKER_MAX_WORKFLOWS": {
     "type": "string",

@@ -8,6 +8,17 @@ Host your own Woodpecker CI on Railway. This template provisions a server (UI, A
 
 [![Deploy to Railway](https://railway.app/button.svg)](https://railway.com/deploy/woodpecker-ci-lite)
 
+## Why Deploy
+
+Woodpecker CI is a modern, lightweight alternative to GitHub Actions that runs your pipelines on your own infrastructure. No Docker daemon required — the agent executes steps locally via the `local` backend, making it ideal for self-hosted CI/CD on Railway.
+
+## Common Use Cases
+
+- **Replace GitHub Actions** — run your own CI/CD pipelines with familiar YAML syntax without relying on GitHub's hosted runners
+- **Self-hosted CI for private repos** — keep your build data and secrets on your own infrastructure
+- **Cost-effective CI for small teams** — single-server deployment with SQLite, no external database needed
+- **Custom build environments** — the local backend runs steps directly on the agent, giving you full control over the execution environment
+
 ## Architecture
 
 - **Server** — UI, API, webhook receiver, pipeline analyzer. Stores everything in SQLite (`/var/lib/woodpecker`).
@@ -24,7 +35,7 @@ Host your own Woodpecker CI on Railway. This template provisions a server (UI, A
 - **Parallel steps** — `WOODPECKER_MAX_WORKFLOWS` controls concurrency
 - **Persistent** — SQLite DB persists across deploys via Railway volume
 
-### Deployment Dependencies
+## Dependencies for
 
 This template is self-contained — no external services required. All data persists on the server's volume. The only external dependency is an OAuth app with your forge (GitHub, GitLab, Forgejo, or Gitea) for user authentication.
 

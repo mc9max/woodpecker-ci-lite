@@ -1,25 +1,111 @@
 {
-  "PORT": "8000",
-  "WOODPECKER_HOST": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
-  "WOODPECKER_OPEN": "true",
-  "WOODPECKER_ADMIN": "",
-  "WOODPECKER_AGENT_SECRET": "${{secret(32)}}",
-  "WOODPECKER_GRPC_SECRET": "${{secret(32)}}",
-  "WOODPECKER_GITHUB": "false",
-  "WOODPECKER_GITHUB_CLIENT": "",
-  "WOODPECKER_GITHUB_SECRET": "",
-  "WOODPECKER_FORGEJO": "false",
-  "WOODPECKER_FORGEJO_CLIENT": "",
-  "WOODPECKER_FORGEJO_SECRET": "",
-  "WOODPECKER_GITEA": "false",
-  "WOODPECKER_GITEA_CLIENT": "",
-  "WOODPECKER_GITEA_SECRET": "",
-  "WOODPECKER_GITLAB": "false",
-  "WOODPECKER_GITLAB_CLIENT": "",
-  "WOODPECKER_GITLAB_SECRET": "",
-  "WOODPECKER_DATABASE_DRIVER": "sqlite3",
-  "WOODPECKER_DATABASE_DATASOURCE": "/var/lib/woodpecker/woodpecker.sqlite",
-  "WOODPECKER_LOG_LEVEL": "info",
-  "WOODPECKER_DEBUG_PRETTY": "false",
-  "WOODPECKER_DEBUG_NOCOLOR": "true"
+  "PORT": {
+    "value": "8000",
+    "description": "HTTP port the server listens on (Railway provides this automatically)"
+  },
+  "WOODPECKER_HOST": {
+    "value": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+    "description": "Public URL of this server (used for webhook callbacks and agent connections)"
+  },
+  "WOODPECKER_OPEN": {
+    "value": "true",
+    "description": "Allow open registration (true/false)"
+  },
+  "WOODPECKER_ADMIN": {
+    "value": "",
+    "description": "Leave empty — first OAuth-registered user becomes admin. Set to your GitHub/Gitea/GitLab username to auto-grant admin on first login. (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_AGENT_SECRET": {
+    "value": "${{secret(32)}}",
+    "description": "Shared secret for agent-to-server authentication (must match agent's secret)"
+  },
+  "WOODPECKER_GRPC_SECRET": {
+    "value": "${{secret(32)}}",
+    "description": "Shared gRPC secret for agent communication"
+  },
+  "WOODPECKER_GRPC_ADDR": {
+    "value": "0.0.0.0:9000",
+    "description": "gRPC listen address (default: 0.0.0.0:9000)"
+  },
+  "WOODPECKER_HTTP_ADDR": {
+    "value": "0.0.0.0:8000",
+    "description": "HTTP listen address (default: 0.0.0.0:8000)"
+  },
+  "WOODPECKER_GITHUB": {
+    "value": "true",
+    "description": "Enable the GitHub forge. Woodpecker v3 requires exactly one forge driver to be enabled or it will crash-loop on startup (forge not configured). Keep true and add WOODPECKER_GITHUB_CLIENT / WOODPECKER_GITHUB_SECRET for the login button to work. To use a different forge instead, set one of WOODPECKER_FORGEJO / WOODPECKER_GITEA / WOODPECKER_GITLAB to true — and this one to false."
+  },
+  "WOODPECKER_GITHUB_CLIENT": {
+    "value": "",
+    "description": "GitHub OAuth Client ID (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_GITHUB_SECRET": {
+    "value": "",
+    "description": "GitHub OAuth Client Secret (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_FORGEJO": {
+    "value": "false",
+    "description": "Enable Forgejo OAuth (true/false)"
+  },
+  "WOODPECKER_FORGEJO_CLIENT": {
+    "value": "",
+    "description": "Forgejo OAuth Client ID (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_FORGEJO_SECRET": {
+    "value": "",
+    "description": "Forgejo OAuth Client Secret (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_GITEA": {
+    "value": "false",
+    "description": "Enable Gitea OAuth (true/false)"
+  },
+  "WOODPECKER_GITEA_CLIENT": {
+    "value": "",
+    "description": "Gitea OAuth Client ID (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_GITEA_SECRET": {
+    "value": "",
+    "description": "Gitea OAuth Client Secret (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_GITLAB": {
+    "value": "false",
+    "description": "Enable GitLab OAuth (true/false)"
+  },
+  "WOODPECKER_GITLAB_CLIENT": {
+    "value": "",
+    "description": "GitLab OAuth Client ID (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_GITLAB_SECRET": {
+    "value": "",
+    "description": "GitLab OAuth Client Secret (optional)",
+    "isOptional": true
+  },
+  "WOODPECKER_DATABASE_DRIVER": {
+    "value": "sqlite3",
+    "description": "Database driver (sqlite3, postgres, mysql)"
+  },
+  "WOODPECKER_DATABASE_DATASOURCE": {
+    "value": "/var/lib/woodpecker/woodpecker.sqlite",
+    "description": "Database connection string or path"
+  },
+  "WOODPECKER_LOG_LEVEL": {
+    "value": "info",
+    "description": "Log level (debug, info, warn, error)"
+  },
+  "WOODPECKER_DEBUG_PRETTY": {
+    "value": "false",
+    "description": "Enable pretty-printed debug logs (true/false)"
+  },
+  "WOODPECKER_DEBUG_NOCOLOR": {
+    "value": "true",
+    "description": "Disable colored debug logs (true/false)"
+  }
 }

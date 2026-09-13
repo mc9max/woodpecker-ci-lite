@@ -1,7 +1,26 @@
 {
-  "WOODPECKER_SERVER": "${{woodpecker-server.RAILWAY_PRIVATE_DOMAIN}}:9000",
-  "WOODPECKER_AGENT_SECRET": "${{woodpecker-server.WOODPECKER_AGENT_SECRET}}",
-  "WOODPECKER_GRPC_SECRET": "${{woodpecker-server.WOODPECKER_GRPC_SECRET}}",
-  "WOODPECKER_MAX_WORKFLOWS": "4",
-  "WOODPECKER_BACKEND": "local"
+  "WOODPECKER_SERVER": {
+    "value": "${{woodpecker-server.RAILWAY_PRIVATE_DOMAIN}}:9000",
+    "description": "Server gRPC address (host:port) — use the server's private domain"
+  },
+  "WOODPECKER_AGENT_SECRET": {
+    "value": "${{woodpecker-server.WOODPECKER_AGENT_SECRET}}",
+    "description": "Shared secret for agent-to-server authentication — references the server's secret"
+  },
+  "WOODPECKER_GRPC_SECRET": {
+    "value": "${{woodpecker-server.WOODPECKER_GRPC_SECRET}}",
+    "description": "Shared gRPC secret — references the server's gRPC secret"
+  },
+  "WOODPECKER_MAX_WORKFLOWS": {
+    "value": "4",
+    "description": "Maximum number of parallel workflows"
+  },
+  "WOODPECKER_BACKEND": {
+    "value": "local",
+    "description": "Backend type (local, docker, kubernetes)"
+  },
+  "WOODPECKER_LOG_LEVEL": {
+    "value": "info",
+    "description": "Log level (debug, info, warn, error)"
+  }
 }

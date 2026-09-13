@@ -1,7 +1,7 @@
 {
   "WOODPECKER_SERVER": {
     "type": "string",
-    "description": "Server GRPC address (host:port) — use the server's private domain",
+    "description": "Server gRPC address — references the server service's private domain",
     "defaultValue": "${{woodpecker-server.RAILWAY_PRIVATE_DOMAIN}}:9000"
   },
   "WOODPECKER_AGENT_SECRET": {
@@ -11,7 +11,7 @@
   },
   "WOODPECKER_GRPC_SECRET": {
     "type": "string",
-    "description": "Shared GRPC secret — references the server's GRPC secret",
+    "description": "Shared gRPC secret — references the server's gRPC secret",
     "defaultValue": "${{woodpecker-server.WOODPECKER_GRPC_SECRET}}"
   },
   "WOODPECKER_MAX_WORKFLOWS": {

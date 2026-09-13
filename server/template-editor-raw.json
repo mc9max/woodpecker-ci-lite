@@ -11,6 +11,10 @@
     "value": "true",
     "description": "Allow open registration (true/false)"
   },
+  "RAILWAY_RUN_UID": {
+    "value": "0",
+    "description": "REQUIRED — run the container as root (uid 0). The woodpecker-server -alpine image runs as uid 1000, but Railway mounts the sqlite volume root-owned, so a non-root process cannot open it and crash-loops with 'unable to open database file'. Set to 0 so every fresh install boots."
+  },
   "WOODPECKER_ADMIN": {
     "value": "",
     "description": "Leave empty — first OAuth-registered user becomes admin. Set to your GitHub/Gitea/GitLab username to auto-grant admin on first login. (optional)",

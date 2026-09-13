@@ -38,5 +38,10 @@
     "type": "string",
     "description": "Database driver (sqlite3 or postgres)",
     "defaultValue": "sqlite3"
+  },
+  "RAILWAY_RUN_UID": {
+    "type": "string",
+    "description": "User ID to run as — must be 0 (root) because the Railway volume mounts root-owned. The rootless woodpecker-server -alpine image's default uid (1000) cannot write the database on the root-owned volume (\"unable to open database file\").",
+    "defaultValue": "0"
   }
 }

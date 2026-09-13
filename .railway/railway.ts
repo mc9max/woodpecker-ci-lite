@@ -32,7 +32,10 @@ export default defineRailway(() => {
     env: {
       GODEBUG: "netdns=go",
       PORT: preserve(),
-      RAILWAY_RUN_UID: preserve(),
+      // Railway volumes mount root-owned; the rootless -alpine image runs as
+      // uid 1000 (woodpecker) and gets "unable to open database file" (ENOENT
+      // on the root-owned volume). Default the server to uid 0.
+      RAILWAY_RUN_UID: "0",
       WOODPECKER_ADMIN: preserve(),
       WOODPECKER_AGENT_SECRET: preserve(),
       WOODPECKER_DATABASE_DATASOURCE: preserve(),

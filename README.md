@@ -6,7 +6,7 @@ Lightweight self-hosted CI/CD platform — GitHub Actions alternative. Runs pipe
 
 Host your own Woodpecker CI on Railway. This template provisions a server (UI, API, SQLite) and an agent (pipeline executor) with persistent storage for your build data.
 
-[![Deploy to Railway](https://railway.app/button.svg)](https://railway.com/deploy/00TmXS)
+[![Deploy to Railway](https://railway.app/button.svg)](https://railway.com/deploy/woodpecker-ci-lite)
 
 ## Why Deploy
 
@@ -19,19 +19,19 @@ Woodpecker CI is a modern, lightweight alternative to GitHub Actions that runs y
 - **Cost-effective CI for small teams** — single-server deployment with SQLite, no external database needed
 - **Custom build environments** — the local backend runs steps directly on the agent, giving you full control over the execution environment
 
-## Deployment Dependencies
+### Deployment Dependencies
 
 This template is self-contained — no external services required. All data persists on the server's volume. The server **boots on one-click deploy** (the GitHub forge is enabled by default, so Woodpecker's startup requirement is already met).
 
 To get **working login**, add a one-time GitHub OAuth App (the login button uses it):
 
 1. Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
-2. **Homepage URL:** `https://<your-railway-public-domain>`
-3. **Authorization callback URL:** `https://<your-railway-public-domain>/authorize`
+2. **Homepage URL:** `https://YOUR-RAILWAY-PUBLIC-DOMAIN`
+3. **Authorization callback URL:** `https://YOUR-RAILWAY-PUBLIC-DOMAIN/authorize`
 4. Copy the **Client ID** and **Client Secret**
 5. In Railway, set these on the `woodpecker-server` service (the OAuth flags are already `true` by default):
-   - `WOODPECKER_GITHUB_CLIENT=<your-client-id>`
-   - `WOODPECKER_GITHUB_SECRET=<your-client-secret>`
+   - `WOODPECKER_GITHUB_CLIENT=YOUR-GITHUB-CLIENT-ID`
+   - `WOODPECKER_GITHUB_SECRET=YOUR-GITHUB-CLIENT-SECRET`
 6. Redeploy the server service
 
 > **Why the forge defaults to `true`:** Woodpecker v3 refuses to start with no forge driver enabled (`forge not configured`). Enabling exactly one is mandatory. GitHub is enabled by default so the first deploy doesn't crash-loop; add the OAuth client/secret above to activate login. Using another forge? Set one of `WOODPECKER_FORGEJO` / `WOODPECKER_GITEA` / `WOODPECKER_GITLAB` to `true` and set `WOODPECKER_GITHUB=false`.
@@ -91,7 +91,7 @@ Both services must share the same `WOODPECKER_AGENT_SECRET`. The server stores a
 1. Deploy via the button above — the server and agent boot immediately (GitHub forge is enabled by default).
 2. Create a GitHub OAuth App (see Deployment Dependencies above).
 3. Set `WOODPECKER_GITHUB_CLIENT` and `WOODPECKER_GITHUB_SECRET` on the `woodpecker-server` service and redeploy to enable login.
-4. Log in; you'll automatically be an admin (first user). Optionally set `WOODPECKER_ADMIN=<your-username>`.
+4. Log in; you'll automatically be an admin (first user). Optionally set `WOODPECKER_ADMIN=your-username`.
 5. Add your first repository under **Projects** and push a `.woodpecker.yml` pipeline.
 
 ## License
